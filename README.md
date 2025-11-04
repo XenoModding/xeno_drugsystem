@@ -1,100 +1,107 @@
-FiveM Drogen-System – README
-📦 Übersicht
+# 💊 Xeno-DrugSystem
 
-Dieses Resource fügt deinem FiveM-Server ein vollständiges Drogen-System hinzu. Spieler können Drogen sammeln, verarbeiten und anschließend an einem Dealer verkaufen. Das System ist modular aufgebaut und kann leicht an ESX oder QBCore angepasst werden.
+Ein modernes und realistisches **Drogen-System für FiveM**, entwickelt von **Xeno Modding**.
+Dieses Script bringt ein dynamisches, immersives Drogenerlebnis auf deinen Server – perfekt für **Roleplay, Wirtschaft und Crime-Gameplay**.
 
-⚙️ Installation
+---
 
-Lade alle Dateien dieses Projekts herunter.
+## 🚀 Funktionen
 
-Lege sie in deinen Server unter resources/[local]/drugsystem.
+🌿 **Sammeln, Verarbeiten & Verkaufen** – Komplettes System vom Anbau bis zum Verkauf.
+⚗️ **Konfigurierbare Produktionsketten** – Leicht anpassbare Zeiten, Items und Preise.
+🗺️ **Zonen-System** – Definiere Sammel-, Verarbeitungs- und Verkaufszonen mit Koordinaten.
+💬 **Benachrichtigungssystem** – Integrierte Notifications für alle Spieleraktionen.
+🧩 **Framework-kompatibel** – Einfach mit **ESX** oder **QBCore** integrierbar.
+⚙️ **Leicht konfigurierbar & erweiterbar** – Perfekt anpassbar für deinen Serverstil.
 
-Öffne deine server.cfg und füge folgende Zeile hinzu:
+---
 
-start drugsystem
+## 🧠 Installation
 
-Passe die Konfiguration in config.lua an — insbesondere die Positionen der Zonen und die Itemnamen, die zu deinem Framework passen.
+1. Lade den Ordner **`xeno_drugsystem`** herunter.
+2. Platziere ihn im `resources`-Ordner deines Servers.
+3. Füge folgende Zeile in deine **`server.cfg`** ein:
 
-Implementiere in server.lua die Inventory- und Geld-Funktionen passend zu deinem Framework (siehe unten).
+   ```cfg
+   start xeno_drugsystem
+   ```
+4. Starte deinen Server neu – fertig! ✅
 
-🧩 Framework-Integration
-ESX
-local xPlayer = ESX.GetPlayerFromId(source)
-xPlayer.addInventoryItem('processed_drug', 1)
+---
 
-Zum Entfernen:
+## ⚙️ Konfiguration
 
-xPlayer.removeInventoryItem('processed_drug', 1)
+Alle Einstellungen findest du in der Datei `config.lua`:
 
-Geld geben:
+* **Zonen** (Sammeln, Verarbeiten, Dealer-Positionen)
+* **Items** (Rohstoffe & verarbeitete Produkte)
+* **Zeiten** (Sammel-, Verarbeitungs-, Verkaufsdauer)
+* **Preise** (Min./Max. Verkaufspreise)
 
-xPlayer.addMoney(gained)
-QBCore
-local Player = QBCore.Functions.GetPlayer(source)
-Player.Functions.AddItem('processed_drug', 1)
+Beispiel:
 
-Zum Entfernen:
-
-Player.Functions.RemoveItem('processed_drug', 1)
-
-Geld geben:
-
-Player.Functions.AddMoney('cash', gained)
-🗺️ Zonen
-
-In config.lua kannst du die Positionen der Sammel-, Verarbeitungs- und Verkaufszonen festlegen:
-
+```lua
 Config.Zones = {
     HerbField = { x = 2224.0, y = 5577.0, z = 53.7 },
     ProcessLab = { x = 1868.0, y = 3687.0, z = 34.3 },
     Dealer = { x = -1197.0, y = -1567.0, z = 4.6 }
 }
-💰 Preise & Zeiten
+```
 
-In derselben Datei kannst du Bearbeitungszeiten und Verkaufswerte anpassen:
+---
 
-Config.Times = {
-    gather = 7000, -- Zeit zum Sammeln (ms)
-    process = 10000, -- Zeit zum Verarbeiten (ms)
-    sell = 3000 -- Zeit zum Verkaufen (ms)
-}
+## 🧩 Framework-Integration
 
+Das Script ist **framework-agnostisch** aufgebaut – du kannst es leicht an **ESX** oder **QBCore** anpassen.
 
-Config.Prices = {
-    sellMin = 150,
-    sellMax = 300
-}
-🧠 Funktionsweise
+### ESX Beispiel
 
-Spieler begeben sich zu den definierten Sammelpunkten.
+```lua
+local xPlayer = ESX.GetPlayerFromId(source)
+xPlayer.addInventoryItem('processed_drug', 1)
+```
 
-Mit E wird das Sammeln gestartet (es dauert einige Sekunden).
+### QBCore Beispiel
 
-Nach Abschluss erhalten sie ein Rohmaterial (z. B. raw_herb).
+```lua
+local Player = QBCore.Functions.GetPlayer(source)
+Player.Functions.AddItem('processed_drug', 1)
+```
 
-An der Verarbeitungsstation kann dieses in das Endprodukt (processed_drug) umgewandelt werden.
+---
 
-Beim Dealer können fertige Produkte gegen Bargeld verkauft werden.
+## 🔧 Erweiterungen
 
-🔧 Debug & Erweiterung
+💡 Ideen für zukünftige Updates oder eigene Anpassungen:
 
-Aktiviere Debug-Ausgaben in config.lua mit Config.Debug = true.
+* 🔀 Zufällige Sammelpunkte
+* 🚓 Polizei-Benachrichtigung bei Verkäufen
+* 🧬 Drogenqualität & Risiko-System
+* 🕹️ Minigames beim Verarbeiten
+* 📦 Integration mit `ox_inventory` oder anderen Inventar-Systemen
 
-Erweiterungsideen:
+---
 
-Zufällige Sammelpunkte.
+## 👤 Entwickler
 
-Polizei-Warnungen beim Verkauf.
+**Xeno Modding**
+🔗 Discord: [discord.gg/FYAVUQP9JW](https://discord.gg/FYAVUQP9JW)
+💻 GitHub: [github.com/XenoModding](https://github.com/XenoModding)
 
-Minigames beim Verarbeiten.
+---
 
-Abhängigkeiten von Skills oder Gegenständen.
+## 📄 Lizenz
 
-🧾 Credits
+Dieses Script ist **frei verwendbar**.
+Du darfst es auf deinem Server **nutzen, anpassen oder erweitern** – Credits an **Xeno Modding** sind **willkommen, aber nicht erforderlich**. ❤️
 
-Version: 1.0.0
-Lizenz: Frei nutzbar für nicht-kommerzielle Serverprojekte.
+---
 
-❤️ Support & Anpassung
+## 💡 Unterstützung
 
-Wenn du möchtest, kann ich dir helfen, das System direkt für dein Framework (ESX/QBCore) oder dein Inventory-Script (z. B. ox_inventory) zu konfigurieren. Sag mir einfach, welches du nutzt, und ich passe den Code an.
+Für Fragen, Vorschläge oder Bug-Reports:
+📬 Erstelle ein Issue auf GitHub oder kontaktiere uns direkt über **Discord**.
+
+---
+
+✨ **Viel Spaß mit *xeno_drugsystem* – entwickelt mit Leidenschaft von
